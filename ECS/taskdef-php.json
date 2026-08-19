@@ -1,0 +1,37 @@
+{
+  "family": "task-php-yamaguchi-0817",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::561378667739:role/TaskExecutionRole-yamaguchi-0817",
+  "containerDefinitions": [
+    {
+      "name": "php",
+      "image": "561378667739.dkr.ecr.ap-northeast-1.amazonaws.com/ecr-php-yamaguchi-0817:latest",
+      "memory": 512,
+      "cpu": 256,
+      "essential": true,
+      "portMappings": [
+        {
+           "containerPort": 80,
+            "protocol": "tcp"
+         }
+      ],
+      "environment": [
+        { "name": "DB_HOST", "value": "db-yamaguchi-0817.cslvd50pss4x.ap-northeast-1.rds.amazonaws.com" },
+        { "name": "DB_USER", "value": "root" },
+        { "name": "DB_PASS", "value": "root1234" },
+        { "name": "DB_NAME", "value": "sampledb" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/task-yamaguchi-0817",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "php"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024"
+}
